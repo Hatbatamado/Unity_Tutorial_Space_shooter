@@ -25,10 +25,13 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        //float moveHorizontal = Input.GetAxis("Horizontal");
+        //float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        //Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        Vector3 acceleration = Input.acceleration;
+        Vector3 movement = new Vector3(acceleration.x, 0.0f, acceleration.y);
         GetComponent<Rigidbody>().velocity = movement * speed;
         GetComponent<Rigidbody>().position = new Vector3
         (
