@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
@@ -8,34 +9,36 @@ public class GameController : MonoBehaviour {
     public float spawnWait;
     public float startWait;
     public float waveWait;
-    public GUIText scoreText;
-    public GUIText restatText;
-    public GUIText gameOverText;
+    public Text scoreText;
+    //public Text restatText;
+    public Text gameOverText;
+    public GameObject restartButton;
     private int score;
     private bool gameOver;
-    private bool restart;
+    //private bool restart;
 
     void Start()
     {
         gameOver = false;
-        restart = false;
+        //restart = false;
         gameOverText.text = "";
-        restatText.text = "";
+        //restatText.text = "";
+        restartButton.SetActive(false);
         score = 0;
         UpdateScore();
         StartCoroutine(SpawnWaves());
     }
 
-    void Update()
-    {
-        if (restart)
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Application.LoadLevel(Application.loadedLevel);
-            }
-        }
-    }
+    //void Update()
+    //{
+    //    if (restart)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.R))
+    //        {
+    //            Application.LoadLevel(Application.loadedLevel);
+    //        }
+    //    }
+    //}
 
     IEnumerator SpawnWaves()
     {
@@ -52,8 +55,9 @@ public class GameController : MonoBehaviour {
 
             if (gameOver)
             {
-                restart = true;
-                restatText.text = "Press 'R' for restart";
+                restartButton.SetActive(true);
+                //restart = true;
+                //restatText.text = "Press 'R' for restart";
                 break;
             }
 
@@ -76,5 +80,10 @@ public class GameController : MonoBehaviour {
     {
         gameOver = true;
         gameOverText.text = "Game Over!";
+    }
+
+    public void RestartGame()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
